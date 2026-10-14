@@ -1,0 +1,69 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Create Support Ticket{% endblock %}
+
+{% block header %}
+Create New Support Ticket
+{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h4 class="card-title mb-3">
+            Submit an IT Support Request
+        </h4>
+
+        <form method="post">
+            <div class="mb-3">
+                <label for="title" class="form-label">
+                    Ticket Title
+                </label>
+                <input type="text"
+                       class="form-control"
+                       name="title"
+                       id="title"
+                       value="{{ request.form['title'] }}"
+                       required>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">
+                    Description
+                </label>
+                <textarea class="form-control"
+                          name="description"
+                          id="description"
+                          rows="5"
+                          required>{{ request.form['description'] }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="priority" class="form-label">
+                    Priority
+                </label>
+                <select class="form-select"
+                        name="priority"
+                        id="priority">
+                    {% for level in ['Low', 'Medium', 'High'] %}
+                    <option value="{{ level }}"
+                        {% if request.form.get('priority', 'Medium') == level %}selected{% endif %}>
+                        {{ level }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Submit Ticket
+            </button>
+
+            <a href="{{ url_for('tickets.index') }}"
+               class="btn btn-secondary">
+                Cancel
+            </a>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

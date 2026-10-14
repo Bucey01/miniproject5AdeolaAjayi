@@ -1,0 +1,56 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Support Tickets{% endblock %}
+
+{% block header %}
+My Support Tickets
+{% endblock %}
+
+{% block content %}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h4 class="card-title mb-3">
+            IT Support Ticket Dashboard
+        </h4>
+
+        <p class="text-muted">
+            View and manage your submitted IT support tickets.
+        </p>
+
+        {% if tickets %}
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-primary">
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ticket in tickets %}
+                    <tr>
+                        <td>{{ ticket['id'] }}</td>
+                        <td>{{ ticket['title'] }}</td>
+                        <td>{{ ticket['priority'] }}</td>
+                        <td>{{ ticket['status'] }}</td>
+                        <td>{{ ticket['created'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="alert alert-info">
+            You have not submitted any support tickets yet.
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}
