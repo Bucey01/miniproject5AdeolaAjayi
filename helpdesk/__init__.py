@@ -4,7 +4,7 @@
 
 import os
 
-from flask import Flask
+from flask import Flask, render_template
 
 
 def create_app(test_config=None):
@@ -27,7 +27,8 @@ def create_app(test_config=None):
 
     @app.route("/")
     def index():
-        return "Welcome to the IT Help Desk Ticket Management System!"
+        return render_template("index.html")
+
 
     from . import db
     db.init_app(app)
@@ -36,6 +37,7 @@ def create_app(test_config=None):
     app.register_blueprint(auth.bp)
 
     return app
+
 
 
 

@@ -1,0 +1,36 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block header %}
+IT Help Desk Dashboard
+{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h4>Welcome to the IT Help Desk Ticket Management System!</h4>
+        <p>
+            Manage and track IT support tickets in one place.
+        </p>
+
+        {% if g.user %}
+            <p>Logged in as {{ g.user['username'] }}.</p>
+        {% else %}
+            <p>
+                Please register or log in to manage your tickets.
+            </p>
+            <a href="{{ url_for('auth.login') }}"
+               class="btn btn-primary">
+                Log In
+            </a>
+            <a href="{{ url_for('auth.register') }}"
+               class="btn btn-outline-primary">
+                Register
+            </a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
