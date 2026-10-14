@@ -73,3 +73,32 @@ def create():
     return render_template("tickets/create.html")
 
 
+
+@bp.route("/<int:id>/status", methods=("POST",))
+@login_required
+def update_status(id):
+    status = request.form.get("status", "")
+
+    if status not in ("Open", "In Progress", "Closed"):
+        flash("Invalid ticket status.")
+        return redirect(url_for("tickets.index"))
+
+    db = get_db()
+
+    ticket = db.execute(
+        "SELECT id FROM tickets WHERE id = ? AND user_id = ?",
+        (id, g.user["id"]),
+    ).fetchone()
+
+    if ticket is None:
+        abort(404)
+
+    db.execute(
+        "UPDATE tickets SET status = ? WHERE id = ? AND user_id = ?",
+        (status, id, g.user["id"]),
+    )
+    db.commit()
+
+    flash("Ticket status updated successfully!")
+    return redirect(url_for("tickets.index"))
+
