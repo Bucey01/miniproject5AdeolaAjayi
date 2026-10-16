@@ -106,7 +106,7 @@ Mini Project 5
 
 ## AI Usage
 
-ChatGPT was used as an AI assistant during the development of Mini Project 5, an IT Help Desk Ticket Management System built using Python, Flask, SQLite, HTML, and Bootstrap.
+Claude Code was used as an AI assistant during the development of Mini Project 5, an IT Help Desk Ticket Management System built using Python, Flask, SQLite, HTML, and Bootstrap.
 
 **How AI was used:**
 
